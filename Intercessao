@@ -41,18 +41,20 @@ void add(node *pai, node *filho)
     }
 }
 
-
 int find(node *raiz, int valor)
 {
     if (raiz != NULL)
     {
         if (valor == raiz->value)
             return 1;
-        imprimir_arvore(raiz->primeiro_filho);
-        imprimir_arvore(raiz->proximo_irmao);
+        if (find(raiz->primeiro_filho, valor))
+            return 1;
+        if (find(raiz->proximo_irmao, valor))
+            return 1;
     }
     return 0;
 }
+
 void percorrer(node *raiz, node *raiz1)
 {
     if (raiz == NULL)
@@ -72,16 +74,16 @@ int main()
     node *raiz = criar_no(1);
     node *filho1 = criar_no(2);
     node *filho2 = criar_no(3);
-    node *filho3 = criar_no(4);
+    node *filho3 = criar_no(90);
     add(raiz, filho1);
     add(raiz, filho2);
     add(raiz, filho3);
 
     // segunda arvore declaracao.
-    node *raiz1 = criar_no(90);
-    node *filhoum = criar_no(5);
+    node *raiz1 = criar_no(1);
+    node *filhoum = criar_no(2);
     node *filhodois = criar_no(3);
-    node *filhotres = criar_no(1);
+    node *filhotres = criar_no(90);
 
     add(raiz1, filhoum);
     add(raiz1, filhodois);
@@ -91,3 +93,4 @@ int main()
     percorrer(raiz, raiz1);
     return 0;
 }
+
